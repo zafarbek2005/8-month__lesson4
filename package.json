@@ -8,7 +8,7 @@
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "server": "npx json-server --port 4000 --watch data/db.json"
+    "data": "npx json-server -p 4000 -w data/db.json"
   },
   "dependencies": {
     "react": "^18.2.0",

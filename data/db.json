@@ -1,8 +1,14 @@
 {
   "blogs": [
     {
-      "id": "1",
-      "title": "Hello Server"
+      "title": "Hello Samer",
+      "price": "48",
+      "id": "9cf1"
+    },
+    {
+      "id": "36df",
+      "title": "Abbos",
+      "price": "9999999999"
     }
   ]
 }

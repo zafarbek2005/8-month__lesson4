@@ -20,17 +20,7 @@ const CreateForm = () => {
   };
   return (
     <div className="inp container">
-      <form onSubmit={handleSubmit} action="">
-        <Fetch />
-        <input type="text" name="fname" placeholder="fname" />
-        <input type="text" name="lname" placeholder="lname" />
-        <input type="number" name="age" placeholder="age" />
-        <div>
-          <input type="radio" name="gender" id="" value={"male"} />
-          <input type="radio" name="gender" id="" value={"female"} />
-        </div>
-        <button>Create</button>
-      </form>
+      <Fetch />
     </div>
   );
 };
