@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 import "./Create.scss";
-import abbos from "/abbos.jpg";
 const API_URL = "http://localhost:4000/blogs";
 
 const Product = () => {
@@ -16,10 +16,23 @@ const Product = () => {
   }, [reload]);
 
   const handleDeleteProduct = (id) => {
-    fetch(`${API_URL}/${id}`, {
-      method: "DELETE",
-    }).then(() => {
-      setReload((prev) => !prev);
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`${API_URL}/${id}`, {
+          method: "DELETE",
+        }).then(() => {
+          setReload((prev) => !prev);
+          Swal.fire('Deleted!', 'Your product has been deleted.', 'success');
+        });
+      }
     });
   };
 
@@ -58,35 +71,32 @@ const Product = () => {
   };
 
   const links = products.map((product) => (
-    <>
-      <div className="card" key={product.id}>
-        <img src={abbos} alt={product.name} />
-        <div className="pr_title">
-          <h1>{product.title}</h1>
-          <p className="price">{product.price}$</p>
+    <div className="card" key={product.id}>
+      <img src="https://images.pexels.com/photos/35537/child-children-girl-happy.jpg?cs=srgb&dl=pexels-bess-hamiti-83687-35537.jpg&fm=jpg" alt={product.name} />
+      <div className="pr_title">
+        <h1>{product.title}</h1>
+        <p className="price">{product.price}$</p>
+      </div>
+      <h3>{product.name}</h3>
+      <p>{product.description}</p>  
+      <div className="delet">
+        <div className="delet_all">
+          <button onClick={() => handleDeleteProduct(product.id)}>
+            Delete
+          </button>
         </div>
-        <h3>{product.name}</h3>
-        <p>{product.description}</p>
-
-        <div className="delet">
-          <div className="delet_all">
-            <button onClick={() => handleDeleteProduct(product.id)}>
-              Delete
-            </button>
-          </div>
-          <div className="delet_all1">
-            <button
-              onClick={() => {
-                setProduct(product);
-                setEdit(false);
-              }}
-            >
-              Edit
-            </button>
-          </div>
+        <div className="delet_all1">
+          <button
+            onClick={() => {
+              setProduct(product);
+              setEdit(false);
+            }}
+          >
+            Edit
+          </button>
         </div>
       </div>
-    </>
+    </div>
   ));
 
   return (
